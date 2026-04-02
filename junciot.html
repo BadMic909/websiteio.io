@@ -1624,6 +1624,7 @@ img, video, canvas {
 </section>
 
 <script>
+
   function showTab(id, el) {
     document.querySelectorAll('.menu-grid').forEach(function(g) { g.style.display = 'none'; });
     document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
@@ -1631,12 +1632,6 @@ img, video, canvas {
     el.classList.add('active');
   }
    document.addEventListener("keydown", function (event){
-
-  if (event.ctrlKey){
-
-     event.preventDefault();
-
-  }
 
   if(event.keyCode == 123){
 
@@ -1650,6 +1645,32 @@ img, video, canvas {
      event => event.preventDefault() 
 
   )
+  document.addEventListener("keydown", function (event) {
+
+  // Allow Ctrl + R (refresh)
+  if (event.ctrlKey && (event.key === 'r' || event.key === 'R')) {
+    return; // don't block it
+  }
+
+  // Block other Ctrl shortcuts
+  if (event.ctrlKey) {
+    event.preventDefault();
+  }
+
+  // Block F12
+  if (event.keyCode === 123) {
+    event.preventDefault();
+  }
+
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+  const encrypted = CryptoJS.AES.encrypt("<h1>Secret HTML</h1>", "password123").toString();
+  const decrypted = CryptoJS.AES.decrypt(encrypted, "password123").toString(CryptoJS.enc.Utf8);
+  document.write(decrypted);
+  
 </script>
 
 
