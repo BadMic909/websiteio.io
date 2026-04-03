@@ -3,736 +3,561 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>City Clinic, Bengaluru</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>City Clinic — Gunjur, Bengaluru</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f1117;
+  --ink2:#3a3d47;
+  --muted:#7c8090;
+  --teal:#1a7a6e;
+  --teal-light:#e6f4f2;
+  --teal-mid:#2fa898;
+  --teal-dark:#0f5a52;
+  --gold:#c8973a;
+  --gold-light:#fdf6ea;
+  --cream:#f9f8f5;
+  --white:#ffffff;
+  --border:rgba(26,122,110,0.13);
+  --border2:rgba(0,0,0,0.07);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden}
 
-  :root {
-    --rose: #C9747A;
-    --rose-light: #F5E8E9;
-    --rose-dark: #8B3F44;
-    --cream: #FAF7F2;
-    --warm-white: #FFFEF9;
-    --charcoal: #2A2420;
-    --muted: #7A6E6A;
-    --border: rgba(201,116,122,0.18);
-    --gold: #C8A96E;
-  }
+/* ─── CURSOR DOT ─── */
+.cursor-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;mix-blend-mode:multiply}
 
-  html { scroll-behavior: smooth; }
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 5vw;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border2);
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.35rem;color:var(--teal-dark);letter-spacing:.01em;
+  display:flex;align-items:center;gap:.55rem;text-decoration:none;
+}
+.logo-dot{width:9px;height:9px;background:var(--teal-mid);border-radius:50%;display:inline-block;margin-bottom:1px}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--ink2);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-pill{
+  background:var(--teal);color:#fff;border:none;
+  padding:.62rem 1.5rem;border-radius:100px;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  transition:background .2s,box-shadow .2s;
+  text-decoration:none;display:inline-block;
+}
+.nav-pill:hover{background:var(--teal-dark);box-shadow:0 4px 18px rgba(26,122,110,.25)}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--warm-white);
-    color: var(--charcoal);
-    overflow-x: hidden;
-  }
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:55% 45%;
+  padding-top:72px;position:relative;overflow:hidden;
+}
+.hero-bg-strip{
+  position:absolute;right:0;top:0;bottom:0;width:45%;
+  background:var(--teal-light);z-index:0;
+}
+.hero-left{
+  padding:7rem 5vw 7rem 5vw;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
+}
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:4rem 3rem 4rem 2rem;
+}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(255,254,249,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400;
-    color: var(--rose-dark);
-    letter-spacing: 0.02em;
-  }
-  .nav-logo span { font-style: italic; color: var(--rose); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    text-decoration: none; color: var(--muted);
-    font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
-    transition: color 0.25s;
-  }
-  .nav-links a:hover { color: var(--rose); }
-  .nav-cta {
-    background: var(--rose); color: white;
-    border: none; padding: 0.6rem 1.5rem;
-    border-radius: 100px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem; letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: background 0.25s, transform 0.15s;
-  }
-  .nav-cta:hover { background: var(--rose-dark); transform: translateY(-1px); }
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--teal-light);color:var(--teal-dark);
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:.38rem 1rem;border-radius:100px;
+  border:1px solid rgba(26,122,110,.18);
+  margin-bottom:1.6rem;
+  animation:up .7s ease both;
+}
+.eyebrow::before{content:'';width:6px;height:6px;background:var(--teal-mid);border-radius:50%}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    padding-top: 80px;
-    position: relative; overflow: hidden;
-  }
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 6rem 3rem 6rem 4rem;
-    position: relative; z-index: 2;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--rose-light); color: var(--rose-dark);
-    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.4rem 1rem; border-radius: 100px;
-    margin-bottom: 1.8rem;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-badge::before {
-    content: ''; width: 6px; height: 6px;
-    background: var(--rose); border-radius: 50%;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5vw, 4.8rem);
-    font-weight: 300; line-height: 1.1;
-    color: var(--charcoal);
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-  .hero-title em { font-style: italic; color: var(--rose); }
-  .hero-sub {
-    font-size: 1rem; color: var(--muted);
-    line-height: 1.7; max-width: 420px;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .btn-primary {
-    background: var(--rose); color: white;
-    border: none; padding: 0.9rem 2rem;
-    border-radius: 100px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    transition: background 0.25s, transform 0.15s;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent; color: var(--charcoal);
-    border: 1.5px solid var(--border); padding: 0.9rem 2rem;
-    border-radius: 100px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-    transition: border-color 0.25s, color 0.25s;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--rose); color: var(--rose); }
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,4.5vw,4rem);
+  font-weight:400;line-height:1.12;
+  color:var(--ink);margin-bottom:1.4rem;
+  animation:up .7s .08s ease both;
+}
+.hero-title em{font-style:italic;color:var(--teal)}
+.hero-title strong{font-weight:500}
 
-  .hero-stats {
-    display: flex; gap: 2.5rem; margin-top: 3rem;
-    padding-top: 2rem; border-top: 1px solid var(--border);
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
-  .stat-item {}
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 400;
-    color: var(--rose);
-  }
-  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero-sub{
+  font-size:1rem;color:var(--muted);line-height:1.8;max-width:460px;
+  margin-bottom:2.5rem;font-weight:300;
+  animation:up .7s .16s ease both;
+}
+.hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;animation:up .7s .24s ease both}
+.btn-main{
+  background:var(--teal);color:#fff;border:none;padding:.85rem 2rem;border-radius:100px;
+  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:600;
+  transition:background .2s,transform .15s;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-main:hover{background:var(--teal-dark);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:var(--ink);border:1.5px solid var(--border2);
+  padding:.85rem 2rem;border-radius:100px;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:500;
+  transition:border-color .2s,color .2s;text-decoration:none;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
 
-  .hero-right {
-    position: relative; overflow: hidden;
-    background: var(--rose-light);
-  }
-  .hero-visual {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  /* large decorative circle */
-  .circle-deco {
-    width: 70%; aspect-ratio: 1;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(201,116,122,0.12), rgba(200,169,110,0.15));
-    border: 1px solid rgba(201,116,122,0.25);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .circle-inner {
-    width: 70%; aspect-ratio: 1; border-radius: 50%;
-    background: linear-gradient(135deg, rgba(201,116,122,0.18), rgba(250,247,242,0.9));
-    border: 1px solid rgba(201,116,122,0.3);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.5rem;
-  }
-  .circle-icon {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 4rem; color: var(--rose);
-    line-height: 1;
-  }
-  .circle-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; color: var(--rose-dark);
-    text-align: center; font-style: italic;
-  }
+.hero-pills{
+  display:flex;flex-wrap:wrap;gap:.65rem;margin-top:2.2rem;
+  animation:up .7s .32s ease both;
+}
+.hero-pill{
+  display:flex;align-items:center;gap:.4rem;
+  background:var(--white);border:1px solid var(--border2);
+  padding:.35rem .9rem;border-radius:100px;font-size:.76rem;color:var(--ink2);
+}
+.hero-pill-dot{width:6px;height:6px;background:var(--teal-mid);border-radius:50%}
 
-  /* floating cards */
-  .float-card {
-    position: absolute;
-    background: white;
-    border-radius: 16px;
-    padding: 1rem 1.2rem;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    font-size: 0.82rem;
-    animation: float 4s ease-in-out infinite;
-  }
-  .float-card:nth-child(2) { animation-delay: 1s; }
-  .float-card:nth-child(3) { animation-delay: 2s; }
-  .fc-top { top: 12%; right: 8%; }
-  .fc-bottom { bottom: 20%; left: 6%; }
-  .fc-mid { top: 50%; right: 4%; transform: translateY(-50%); }
-  .fc-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
-  .fc-label { font-weight: 500; color: var(--charcoal); font-size: 0.8rem; }
-  .fc-sub { color: var(--muted); font-size: 0.72rem; margin-top: 0.15rem; }
+/* right side cards */
+.score-card{
+  background:var(--white);border-radius:22px;padding:2rem;
+  box-shadow:0 2px 30px rgba(0,0,0,.07);
+  border:1px solid var(--border2);
+  width:100%;max-width:340px;
+  animation:up .7s .1s ease both;
+  position:relative;overflow:hidden;
+}
+.score-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--teal),var(--teal-mid));
+}
+.score-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.4rem}
+.score-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:500}
+.score-badge{background:var(--teal-light);color:var(--teal-dark);font-size:.68rem;font-weight:600;padding:.22rem .7rem;border-radius:100px;letter-spacing:.04em}
+.score-num{
+  font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:400;color:var(--teal);line-height:1;
+  margin-bottom:.3rem;
+}
+.score-stars{color:var(--gold);font-size:1rem;letter-spacing:.1em;margin-bottom:.4rem}
+.score-sub{font-size:.78rem;color:var(--muted)}
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  .fc-mid { animation: floatMid 4s ease-in-out infinite; animation-delay: 2s; }
-  @keyframes floatMid {
-    0%, 100% { transform: translateY(-50%); }
-    50% { transform: translateY(calc(-50% - 8px)); }
-  }
+.info-cards{display:flex;flex-direction:column;gap:.9rem;margin-top:1.2rem;width:100%;max-width:340px}
+.info-card{
+  background:var(--white);border-radius:16px;padding:1rem 1.2rem;
+  border:1px solid var(--border2);
+  display:flex;align-items:center;gap:.9rem;
+  animation:up .7s .2s ease both;
+}
+.info-card-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--teal-light);display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.info-card-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.1rem}
+.info-card-val{font-size:.88rem;font-weight:600;color:var(--ink)}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ── MARQUEE ── */
-  .marquee-bar {
-    background: var(--rose); color: white;
-    padding: 0.85rem 0; overflow: hidden;
-    display: flex; gap: 0;
-  }
-  .marquee-track {
-    display: flex; gap: 0;
-    animation: marquee 22s linear infinite;
-    white-space: nowrap; flex-shrink: 0;
-  }
-  .marquee-item {
-    display: inline-flex; align-items: center; gap: 0.7rem;
-    padding: 0 2.5rem;
-    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    font-weight: 400;
-  }
-  .marquee-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%; }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+/* ─── TICKER ─── */
+.ticker{background:var(--teal);padding:.75rem 0;overflow:hidden;display:flex}
+.ticker-track{
+  display:flex;gap:0;flex-shrink:0;white-space:nowrap;
+  animation:ticker 24s linear infinite;
+}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:0 2.2rem;color:rgba(255,255,255,.9);
+  font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+}
+.ticker-sep{width:4px;height:4px;background:rgba(255,255,255,.4);border-radius:50%}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ── SECTION SHARED ── */
-  section { padding: 6rem 4rem; }
-  .section-label {
-    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--rose); font-weight: 500; margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.15;
-    color: var(--charcoal); margin-bottom: 1rem;
-  }
-  .section-title em { font-style: italic; color: var(--rose); }
-  .section-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 520px; }
+/* ─── SHARED ─── */
+section{padding:5.5rem 5vw}
+.section-tag{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:.7rem}
+.section-h{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.7rem);font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:.9rem}
+.section-h em{font-style:italic;color:var(--teal)}
+.section-p{font-size:.95rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:520px}
 
-  /* ── SERVICES ── */
-  .services { background: var(--cream); }
-  .services-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    margin-top: 3.5rem;
-  }
-  .service-card {
-    background: white; border-radius: 20px;
-    padding: 2rem;
-    border: 1px solid rgba(201,116,122,0.12);
-    transition: transform 0.25s, box-shadow 0.25s;
-    position: relative; overflow: hidden;
-  }
-  .service-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--rose), var(--gold));
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(201,116,122,0.12); }
-  .service-card:hover::before { opacity: 1; }
-  .service-icon {
-    width: 52px; height: 52px; border-radius: 14px;
-    background: var(--rose-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; margin-bottom: 1.2rem;
-  }
-  .service-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem; font-weight: 400; margin-bottom: 0.6rem;
-    color: var(--charcoal);
-  }
-  .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+/* ─── SERVICES ─── */
+.services{background:var(--cream)}
+.services-layout{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;margin-top:0}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:4rem}
+.serv-card{
+  background:var(--white);border-radius:18px;padding:1.6rem;
+  border:1px solid var(--border2);transition:transform .2s,box-shadow .2s;
+  position:relative;cursor:default;
+}
+.serv-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(0,0,0,.07)}
+.serv-card.featured{background:var(--teal);color:#fff;grid-column:span 2}
+.serv-ico{width:44px;height:44px;border-radius:12px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem}
+.serv-card.featured .serv-ico{background:rgba(255,255,255,.2)}
+.serv-name{font-weight:600;font-size:.95rem;margin-bottom:.45rem}
+.serv-card.featured .serv-name{color:#fff}
+.serv-desc{font-size:.8rem;color:var(--muted);line-height:1.7}
+.serv-card.featured .serv-desc{color:rgba(255,255,255,.75)}
 
-  /* ── WHY US ── */
-  .why { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-  .why-visual {
-    position: relative; display: grid;
-    grid-template-columns: 1fr 1fr; gap: 1rem;
-  }
-  .why-card {
-    background: var(--rose-light); border-radius: 20px;
-    padding: 1.8rem; text-align: center;
-  }
-  .why-card:nth-child(1) { margin-top: 2rem; }
-  .why-card:nth-child(3) { margin-top: -2rem; }
-  .why-card:nth-child(4) { background: var(--rose); color: white; }
-  .why-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem; font-weight: 300; margin-bottom: 0.3rem;
-  }
-  .why-card:nth-child(4) .why-num { color: white; }
-  .why-label { font-size: 0.78rem; color: var(--muted); }
-  .why-card:nth-child(4) .why-label { color: rgba(255,255,255,0.8); }
+/* ─── WHY ─── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.why-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.why-stat{background:var(--cream);border-radius:18px;padding:1.8rem;text-align:center;border:1px solid var(--border2)}
+.why-stat:last-child{background:var(--teal);border-color:transparent}
+.wstat-num{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:400;color:var(--teal);margin-bottom:.2rem}
+.why-stat:last-child .wstat-num{color:#fff}
+.wstat-lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.why-stat:last-child .wstat-lbl{color:rgba(255,255,255,.7)}
+.why-list{display:flex;flex-direction:column;gap:1.3rem;margin-top:2rem}
+.why-item{display:flex;gap:1rem;align-items:flex-start}
+.why-icon{width:38px;height:38px;border-radius:11px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.why-t{font-weight:600;font-size:.9rem;margin-bottom:.2rem}
+.why-d{font-size:.8rem;color:var(--muted);line-height:1.65}
 
-  .why-points { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
-  .why-point { display: flex; gap: 1rem; align-items: flex-start; }
-  .why-point-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: var(--rose-light); display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 1rem;
-  }
-  .why-point-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.2rem; }
-  .why-point-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+/* ─── TESTIMONIALS ─── */
+.testi-section{background:var(--cream)}
+.testi-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.8rem}
+.testi-count{font-size:.8rem;color:var(--muted);text-align:right}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.testi-card{background:var(--white);border-radius:20px;padding:2rem;border:1px solid var(--border2);transition:transform .2s}
+.testi-card:hover{transform:translateY(-3px)}
+.testi-card.accent{background:var(--teal);border-color:transparent}
+.t-stars{color:var(--gold);font-size:.9rem;letter-spacing:.06em;margin-bottom:.9rem}
+.testi-card.accent .t-stars{color:rgba(255,255,255,.7)}
+.t-quote{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;line-height:1.72;margin-bottom:1.4rem;color:var(--ink2)}
+.testi-card.accent .t-quote{color:#fff}
+.t-author{display:flex;align-items:center;gap:.75rem}
+.t-avi{width:34px;height:34px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--teal-dark)}
+.testi-card.accent .t-avi{background:rgba(255,255,255,.2);color:#fff}
+.t-name{font-size:.82rem;font-weight:600;color:var(--ink)}
+.testi-card.accent .t-name{color:#fff}
+.t-src{font-size:.7rem;color:var(--muted)}
+.testi-card.accent .t-src{color:rgba(255,255,255,.6)}
 
-  /* ── DOCTORS ── */
-  .doctors { background: var(--cream); }
-  .doctors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3.5rem; }
-  .doctor-card {
-    background: white; border-radius: 24px; overflow: hidden;
-    border: 1px solid rgba(201,116,122,0.12);
-    display: flex; gap: 0;
-    transition: transform 0.25s;
-  }
-  .doctor-card:hover { transform: translateY(-3px); }
-  .doctor-avatar {
-    width: 140px; flex-shrink: 0;
-    background: linear-gradient(160deg, var(--rose-light), rgba(200,169,110,0.15));
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 1.5rem 1rem;
-    position: relative;
-  }
-  .avatar-initials {
-    width: 72px; height: 72px; border-radius: 50%;
-    background: var(--rose); color: white;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400;
-    margin-bottom: 0.6rem;
-  }
-  .avatar-tag {
-    font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--rose-dark); background: var(--rose-light);
-    padding: 0.2rem 0.5rem; border-radius: 100px;
-  }
-  .doctor-info { padding: 1.5rem; }
-  .doctor-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; font-weight: 400; margin-bottom: 0.2rem;
-  }
-  .doctor-role { font-size: 0.78rem; color: var(--rose); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
-  .doctor-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+/* ─── MAP / CONTACT ─── */
+.contact-section{background:var(--ink);color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.contact-col{padding:5rem 5vw}
+.contact-col:first-child{border-right:1px solid rgba(255,255,255,.08)}
+.contact-section .section-tag{color:var(--teal-mid)}
+.contact-section .section-h{color:#fff}
+.hours-list{margin-top:1.8rem;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden}
+.hour-row{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.hour-row:last-child{border-bottom:none}
+.hour-day{font-size:.83rem;color:rgba(255,255,255,.5)}
+.hour-val{font-size:.83rem;font-weight:600;color:#fff}
+.open-badge{background:rgba(47,168,152,.22);color:var(--teal-mid);font-size:.65rem;font-weight:600;padding:.2rem .65rem;border-radius:100px;letter-spacing:.05em;text-transform:uppercase}
 
-  /* ── TESTIMONIALS ── */
-  .testimonials-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; }
-  .testimonials-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    margin-top: 3rem;
-  }
-  .testi-card {
-    background: var(--cream); border-radius: 20px; padding: 2rem;
-    border: 1px solid var(--border);
-    transition: transform 0.25s;
-  }
-  .testi-card:first-child { background: var(--rose); color: white; }
-  .testi-card:hover { transform: translateY(-3px); }
-  .stars { font-size: 0.85rem; color: var(--gold); margin-bottom: 1rem; }
-  .testi-card:first-child .stars { color: rgba(255,255,255,0.8); }
-  .testi-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; line-height: 1.7; margin-bottom: 1.5rem; }
-  .testi-card:first-child .testi-quote { color: white; }
-  .testi-card:nth-child(n+2) .testi-quote { color: var(--charcoal); }
-  .testi-author { display: flex; align-items: center; gap: 0.8rem; }
-  .author-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--rose-light); display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem; font-weight: 500; color: var(--rose-dark);
-  }
-  .testi-card:first-child .author-avatar { background: rgba(255,255,255,0.25); color: white; }
-  .author-name { font-size: 0.82rem; font-weight: 500; }
-  .testi-card:first-child .author-name { color: white; }
-  .author-info { font-size: 0.72rem; color: var(--muted); }
-  .testi-card:first-child .author-info { color: rgba(255,255,255,0.7); }
+.contact-items{display:flex;flex-direction:column;gap:1.4rem;margin-top:2rem}
+.c-item{display:flex;gap:1rem;align-items:flex-start}
+.c-ico{width:42px;height:42px;border-radius:12px;background:rgba(47,168,152,.14);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.c-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-bottom:.18rem}
+.c-val{font-size:.88rem;color:#fff;line-height:1.5}
+.c-val a{color:var(--teal-mid);text-decoration:none}
+.c-val a:hover{text-decoration:underline}
 
-  /* ── HOURS & LOCATION ── */
-  .info-section {
-    background: var(--charcoal); color: white;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-  }
-  .info-left { padding: 5rem 4rem; border-right: 1px solid rgba(255,255,255,0.1); }
-  .info-right { padding: 5rem 4rem; }
-  .info-section .section-label { color: var(--rose); }
-  .info-section .section-title { color: white; }
-  .hours-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
-  .hour-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
-    font-size: 0.88rem;
-  }
-  .hour-item:last-child { border-bottom: none; }
-  .hour-day { color: rgba(255,255,255,0.6); }
-  .hour-time { color: white; font-weight: 500; }
-  .hour-badge {
-    background: rgba(201,116,122,0.25); color: var(--rose);
-    font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 100px;
-    text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .contact-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
-  .contact-icon {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: rgba(201,116,122,0.15); display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; flex-shrink: 0;
-  }
-  .contact-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; }
-  .contact-value { color: white; font-size: 0.9rem; margin-top: 0.1rem; }
-  .contact-value a { color: var(--rose); text-decoration: none; }
-  .map-preview {
-    margin-top: 2rem; height: 160px; border-radius: 16px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; color: rgba(255,255,255,0.3);
-    position: relative; overflow: hidden;
-  }
-  .map-preview-link {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    margin-top: 0.8rem; color: var(--rose); font-size: 0.82rem;
-    text-decoration: none;
-  }
-  .map-preview-link:hover { text-decoration: underline; }
+.map-box{
+  margin-top:1.8rem;height:155px;border-radius:16px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+}
+.map-ico{font-size:2.2rem}
+.map-txt{font-size:.75rem;color:rgba(255,255,255,.3)}
+.map-link{margin-top:.6rem;display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--teal-mid);text-decoration:none}
+.map-link:hover{text-decoration:underline}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--charcoal); color: rgba(255,255,255,0.4);
-    text-align: center; padding: 2rem 4rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    font-size: 0.78rem;
-  }
-  footer a { color: var(--rose); text-decoration: none; }
+/* ─── CTA STRIP ─── */
+.cta-strip{
+  background:var(--teal);padding:5rem 5vw;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-strip::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 50%, rgba(255,255,255,.06) 0%, transparent 70%);
+}
+.cta-strip>*{position:relative;z-index:1}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;color:#fff;margin-bottom:.9rem;line-height:1.15}
+.cta-sub{font-size:.95rem;color:rgba(255,255,255,.72);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7;font-weight:300}
+.cta-btn{background:#fff;color:var(--teal-dark);border:none;padding:.95rem 2.4rem;border-radius:100px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none;display:inline-block}
+.cta-btn:hover{transform:scale(1.03);box-shadow:0 6px 24px rgba(0,0,0,.2)}
 
-  /* ── CTA BANNER ── */
-  .cta-banner {
-    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
-    padding: 5rem 4rem; text-align: center; color: white;
-    position: relative; overflow: hidden;
-  }
-  .cta-banner::before {
-    content: ''; position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-  .cta-banner > * { position: relative; z-index: 1; }
-  .cta-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; margin-bottom: 1rem;
-  }
-  .cta-sub { font-size: 1rem; opacity: 0.8; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
-  .cta-btn {
-    background: white; color: var(--rose-dark);
-    border: none; padding: 0.95rem 2.5rem; border-radius: 100px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
-    cursor: pointer; transition: transform 0.2s;
-  }
-  .cta-btn:hover { transform: scale(1.03); }
+/* ─── FOOTER ─── */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:1.8rem 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:rgba(255,255,255,.5)}
+.foot-txt{font-size:.74rem;color:rgba(255,255,255,.28);text-align:right}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 4rem 1.5rem; }
-    section { padding: 4rem 1.5rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .why { grid-template-columns: 1fr; }
-    .why-visual { display: none; }
-    .doctors-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .info-section { grid-template-columns: 1fr; }
-    .info-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 3rem 1.5rem; }
-    .info-right { padding: 3rem 1.5rem; }
-    .cta-banner { padding: 4rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; }
-  }
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:.9rem 1.2rem}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-bg-strip{display:none}
+  .hero-right{display:none}
+  .hero-left{padding:4rem 1.2rem}
+  section{padding:3.8rem 1.2rem}
+  .services-layout{grid-template-columns:1fr}
+  .services-layout .section-p{max-width:100%}
+  .services-grid{grid-template-columns:1fr}
+  .serv-card.featured{grid-column:span 1}
+  .why-grid{grid-template-columns:1fr}
+  .why-stat-grid{display:none}
+  .testi-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-col:first-child{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .contact-col{padding:3rem 1.2rem}
+  footer{flex-direction:column;text-align:center}
+  .foot-txt{text-align:center}
+}
 </style>
 </head>
 <body>
 
+<div class="cursor-dot" id="dot"></div>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">City <span>Clinic</span></div>
+  <a class="logo" href="#"><span class="logo-dot"></span> City Clinic</a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#doctors">Doctors</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+  <a href="tel:+918000000000" class="nav-pill">📞 Book Visit</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<div class="hero">
+  <div class="hero-bg-strip"></div>
   <div class="hero-left">
-    <div class="hero-badge">Bengaluru's Trusted Maternity Home</div>
+    <div class="eyebrow">Gunjur, Varthur · Bengaluru</div>
     <h1 class="hero-title">
-      Caring for <em>mothers</em><br>for over three decades
+      Your neighbourhood<br><em>clinic</em> — caring,<br><strong>right here.</strong>
     </h1>
     <p class="hero-sub">
-      City Clinic is a 24-hour maternity home in BTM Layout, Bengaluru — founded by Dr. Ajit Kumar Shetty and Dr. Anupama Shetty. We guide every pregnancy journey with expertise, compassion, and personalized care.
+      City Clinic is a trusted general medicine clinic at GJ Shops, Gunjur — just opposite Chrysalis High. Known for patient listening, clear explanations, and genuine care.
     </p>
     <div class="hero-actions">
-      <a href="tel:+919845013996" class="btn-primary">📞 Call Now</a>
-      <a href="#services" class="btn-outline">Our Services</a>
+      <a href="#contact" class="btn-main">📍 Find Us</a>
+      <a href="#services" class="btn-ghost">See Services</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">30+</div>
-        <div class="stat-label">Years of care</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">24h</div>
-        <div class="stat-label">Open every day</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">94K+</div>
-        <div class="stat-label">Patient reviews</div>
-      </div>
+    <div class="hero-pills">
+      <span class="hero-pill"><span class="hero-pill-dot"></span> Gunjur Main Road</span>
+      <span class="hero-pill"><span class="hero-pill-dot"></span> Opp. Chrysalis High</span>
+      <span class="hero-pill"><span class="hero-pill-dot"></span> GJ Shops, #07</span>
+      <span class="hero-pill"><span class="hero-pill-dot"></span> PIN 560087</span>
     </div>
   </div>
-
   <div class="hero-right">
-    <div class="hero-visual">
-      <div class="circle-deco">
-        <div class="circle-inner">
-          <div class="circle-icon">♥</div>
-          <div class="circle-text">Mother &amp; Child,<br>First Always</div>
+    <div class="score-card">
+      <div class="score-top">
+        <div class="score-label">Justdial Rating</div>
+        <div class="score-badge">Verified Clinic</div>
+      </div>
+      <div class="score-num">4.6</div>
+      <div class="score-stars">★★★★½</div>
+      <div class="score-sub">Based on 26 patient ratings</div>
+    </div>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-icon">📍</div>
+        <div>
+          <div class="info-card-label">Location</div>
+          <div class="info-card-val">Opposite Chrysalis High, Gunjur</div>
         </div>
       </div>
-      <div class="float-card fc-top">
-        <div class="fc-icon">🌸</div>
-        <div class="fc-label">Normal &amp; C-Section</div>
-        <div class="fc-sub">Deliveries handled</div>
+      <div class="info-card">
+        <div class="info-card-icon">🩺</div>
+        <div>
+          <div class="info-card-label">Specialty</div>
+          <div class="info-card-val">General Medicine &amp; Primary Care</div>
+        </div>
       </div>
-      <div class="float-card fc-bottom">
-        <div class="fc-icon">⭐</div>
-        <div class="fc-label">4.7 / 5 Rating</div>
-        <div class="fc-sub"> reviews</div>
-      </div>
-      <div class="float-card fc-mid">
-        <div class="fc-icon">🏥</div>
-        <div class="fc-label">Always Open</div>
-        <div class="fc-sub">24 hrs, 7 days</div>
+      <div class="info-card">
+        <div class="info-card-icon">🏘️</div>
+        <div>
+          <div class="info-card-label">Neighbourhood</div>
+          <div class="info-card-val">Varthur Hobli · East Bengaluru</div>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- MARQUEE -->
-<div class="marquee-bar" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">Maternity Care <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Normal Delivery <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Caesarean Section <span class="marquee-dot"></span></span>
-    <span class="marquee-item">OB / GYN Consultations <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Infertility Treatment <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Antenatal Care <span class="marquee-dot"></span></span>
-    <span class="marquee-item">24-Hour Maternity Home <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Token Consultation System <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Maternity Care <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Normal Delivery <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Caesarean Section <span class="marquee-dot"></span></span>
-    <span class="marquee-item">OB / GYN Consultations <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Infertility Treatment <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Antenatal Care <span class="marquee-dot"></span></span>
-    <span class="marquee-item">24-Hour Maternity Home <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Token Consultation System <span class="marquee-dot"></span></span>
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">General Medicine <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Primary Care <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Fever &amp; Infections <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Diabetes Management <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Blood Pressure <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Prescription &amp; Follow-up <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Gunjur · Varthur · Whitefield <span class="ticker-sep"></span></span>
+    <span class="ticker-item">4.6 ★ on Justdial <span class="ticker-sep"></span></span>
+    <span class="ticker-item">General Medicine <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Primary Care <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Fever &amp; Infections <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Diabetes Management <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Blood Pressure <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Prescription &amp; Follow-up <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Gunjur · Varthur · Whitefield <span class="ticker-sep"></span></span>
+    <span class="ticker-item">4.6 ★ on Justdial <span class="ticker-sep"></span></span>
   </div>
 </div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="section-label">What we offer</div>
-  <h2 class="section-title">Comprehensive women's<br><em>health services</em></h2>
-  <p class="section-desc">From your first prenatal visit to post-delivery recovery, our team provides compassionate, expert care every step of the way.</p>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">🤰</div>
-      <div class="service-name">Antenatal Care</div>
-      <p class="service-desc">Complete monitoring and support throughout pregnancy — routine check-ups, scans, nutrition guidance, and birth planning.</p>
+  <div class="services-layout">
+    <div>
+      <div class="section-tag">What we treat</div>
+      <h2 class="section-h">From everyday<br>ailments to<br><em>long-term care</em></h2>
+      <p class="section-p">City Clinic provides approachable, affordable primary care for residents of Gunjur, Varthur, and the wider Whitefield corridor. No long queues, no rushed appointments.</p>
+      <br><br>
+      <a href="#contact" class="btn-main" style="font-size:.82rem;padding:.7rem 1.5rem">Book a Visit →</a>
     </div>
-    <div class="service-card">
-      <div class="service-icon">👶</div>
-      <div class="service-name">Labour & Delivery</div>
-      <p class="service-desc">Expert management of both normal and caesarean deliveries in a safe, nurturing environment, around the clock.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🌸</div>
-      <div class="service-name">Gynaecology</div>
-      <p class="service-desc">Diagnosis and treatment of gynaecological conditions including PCOS, fibroids, menstrual disorders, and more.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">💛</div>
-      <div class="service-name">Infertility Care</div>
-      <p class="service-desc">Personalised fertility evaluation and treatment plans to support couples on their journey to parenthood.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🍼</div>
-      <div class="service-name">Postnatal Support</div>
-      <p class="service-desc">Comprehensive care for mother and newborn after delivery — breastfeeding guidance, recovery support, and newborn screening.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🩺</div>
-      <div class="service-name">General Consultation</div>
-      <p class="service-desc">Walk-in OPD consultations on a token system. Monday to Saturday, 9:30 AM – 8:00 PM.</p>
+    <div class="services-grid">
+      <div class="serv-card featured">
+        <div class="serv-ico">🩺</div>
+        <div class="serv-name">General Medicine &amp; Primary Care</div>
+        <p class="serv-desc">Your first point of contact for any health concern — the doctor listens carefully, explains your condition clearly, and guides the right course of treatment.</p>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">🌡️</div>
+        <div class="serv-name">Fever &amp; Infections</div>
+        <p class="serv-desc">Viral fever, flu, typhoid, malaria — timely diagnosis and treatment to get you back on your feet fast.</p>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">💉</div>
+        <div class="serv-name">Diabetes &amp; BP Management</div>
+        <p class="serv-desc">Ongoing monitoring and personalised management plans for chronic conditions like diabetes and hypertension.</p>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">🫁</div>
+        <div class="serv-name">Respiratory &amp; Chest</div>
+        <p class="serv-desc">Cough, cold, asthma, breathlessness — assessment and treatment for respiratory conditions of all kinds.</p>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">💊</div>
+        <div class="serv-name">Prescriptions &amp; Follow-ups</div>
+        <p class="serv-desc">Medication reviews, referral letters, and follow-up consultations to ensure you stay on track with your health goals.</p>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">🔬</div>
+        <div class="serv-name">Lab Referrals &amp; Diagnostics</div>
+        <p class="serv-desc">Guidance on blood tests, urine analysis, and imaging — coordinated with trusted labs nearby for fast results.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- WHY US -->
 <section id="why">
-  <div class="why">
-    <div class="why-visual">
-      <div class="why-card">
-        <div class="why-num">30+</div>
-        <div class="why-label">Years of legacy</div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">24h</div>
-        <div class="why-label">Always available</div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">4.1★</div>
-        <div class="why-label">Average rating</div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">BTM</div>
-        <div class="why-label" style="color:rgba(255,255,255,0.75)">Layout, Bengaluru</div>
-      </div>
-    </div>
+  <div class="section-tag">Why patients choose us</div>
+  <div class="why-grid">
     <div>
-      <div class="section-label">Why City Clinic</div>
-      <h2 class="section-title">A legacy built on<br><em>trust &amp; compassion</em></h2>
-      <p class="section-desc">For over three decades, City Clinic has been a cornerstone of maternal health in Bengaluru — founded with the vision of creating a nurturing, expert environment for every mother and child.</p>
-      <div class="why-points">
-        <div class="why-point">
-          <div class="why-point-icon">🏆</div>
+      <h2 class="section-h">A doctor who<br><em>truly listens</em></h2>
+      <p class="section-p">Patients consistently highlight the same thing: the doctor at City Clinic hears you out patiently, never rushes, clarifies every doubt, and explains your medical condition in plain language — not jargon.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-icon">👂</div>
           <div>
-            <div class="why-point-title">Experienced founders</div>
-            <div class="why-point-desc">Founded by Dr. Ajit Kumar Shetty and Dr. Anupama Shetty — each with decades of clinical expertise in obstetrics and gynaecology.</div>
+            <div class="why-t">Patient, attentive consultations</div>
+            <div class="why-d">No rushed 3-minute slots. Every visit gets the time it deserves.</div>
           </div>
         </div>
-        <div class="why-point">
-          <div class="why-point-icon">🌙</div>
+        <div class="why-item">
+          <div class="why-icon">🗺️</div>
           <div>
-            <div class="why-point-title">Round-the-clock maternity care</div>
-            <div class="why-point-desc">Our maternity home never closes. Emergencies don't follow a schedule — and neither do we.</div>
+            <div class="why-t">Conveniently located</div>
+            <div class="why-d">Right opposite Chrysalis High at GJ Shops — easy to find, easy to reach from Gunjur, Varthur, and Whitefield.</div>
           </div>
         </div>
-        <div class="why-point">
-          <div class="why-point-icon">💬</div>
+        <div class="why-item">
+          <div class="why-icon">💬</div>
           <div>
-            <div class="why-point-title">Personalised attention</div>
-            <div class="why-point-desc">Every pregnancy is unique. We listen, guide, and stay with you from the first heartbeat to the first breath.</div>
+            <div class="why-t">Clear explanations, always</div>
+            <div class="why-d">You'll leave understanding your condition, your prescription, and your next steps — every time.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🌿</div>
+          <div>
+            <div class="why-t">Trusted neighbourhood clinic</div>
+            <div class="why-d">A highly-rated local clinic with real community reviews and a reputation built on consistent care.</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- DOCTORS -->
-<section class="doctors" id="doctors">
-  <div class="section-label">Our team</div>
-  <h2 class="section-title">Meet our <em>doctors</em></h2>
-  <div class="doctors-grid">
-    <div class="doctor-card">
-      <div class="doctor-avatar">
-        <div class="avatar-initials">AS</div>
-        <div class="avatar-tag">Founder</div>
+    <div class="why-stat-grid">
+      <div class="why-stat">
+        <div class="wstat-num">4.6</div>
+        <div class="wstat-lbl">Justdial rating</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Ajit Kumar Shetty</div>
-        <div class="doctor-role">Obstetrician & Gynaecologist</div>
-        <p class="doctor-desc">Co-founder of City Clinic with a vision to bring compassionate, expert maternity care to Bengaluru. Dr. Shetty has guided thousands of families through safe, memorable births over three decades.</p>
+      <div class="why-stat">
+        <div class="wstat-num">26+</div>
+        <div class="wstat-lbl">Patient reviews</div>
       </div>
-    </div>
-    <div class="doctor-card">
-      <div class="doctor-avatar">
-        <div class="avatar-initials">AS</div>
-        <div class="avatar-tag">Founder</div>
+      <div class="why-stat">
+        <div class="wstat-num">#07</div>
+        <div class="wstat-lbl">GJ Shops, Gunjur</div>
       </div>
-      <div class="doctor-info">
-        <div class="doctor-name">Dr. Anupama Shetty</div>
-        <div class="doctor-role">Gynaecologist & Obstetrician</div>
-        <p class="doctor-desc">Co-founder and lead consultant, Dr. Anupama is known for her clinical precision and dedication. She personally oversees OPD consultations and complex deliveries at City Clinic.</p>
+      <div class="why-stat">
+        <div class="wstat-num">GP</div>
+        <div class="wstat-lbl">Primary care focus</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="testimonials-header">
+<section class="testi-section" id="reviews">
+  <div class="testi-head">
     <div>
-      <div class="section-label">Patient stories</div>
-      <h2 class="section-title">What mothers <em>say</em></h2>
+      <div class="section-tag">Patient voices</div>
+      <h2 class="section-h">What people <em>say</em></h2>
     </div>
-    <p style="font-size:0.82rem;color:var(--muted);max-width:200px;text-align:right;">Over 94,000 reviews on Google</p>
+    <div class="testi-count">4.6 ★ · 26 ratings<br>Justdial verified</div>
   </div>
-  <div class="testimonials-grid">
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <p class="testi-quote">"Such a wonderful experience. The support staff are so humble and dedicated towards their work. Thank you Dr. Anupama — superb experience overall."</p>
-      <div class="testi-author">
-        <div class="author-avatar">RS</div>
+  <div class="testi-grid">
+    <div class="testi-card accent">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Had a good experience with the doctor. He hears to you patiently, clarifies your doubts and explains your medical condition. Thanks for the continuous support."</p>
+      <div class="t-author">
+        <div class="t-avi">P</div>
         <div>
-          <div class="author-name">Rathod S.</div>
-          <div class="author-info">Google review</div>
+          <div class="t-name">Patient Review</div>
+          <div class="t-src">Justdial · Gunjur</div>
         </div>
       </div>
     </div>
     <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <p class="testi-quote">"I had a smooth and safe delivery here. The doctors and the medical team guided me every step. I am deeply grateful to City Clinic for bringing my baby safely into the world."</p>
-      <div class="testi-author">
-        <div class="author-avatar">SM</div>
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Very convenient location — right opposite Chrysalis High. The clinic is clean, the wait is reasonable, and the doctor takes time to understand your problem before prescribing anything."</p>
+      <div class="t-author">
+        <div class="t-avi">R</div>
         <div>
-          <div class="author-name">Sunitha M.</div>
-          <div class="author-info">Google review</div>
+          <div class="t-name">Resident, Gunjur</div>
+          <div class="t-src">Justdial · verified patient</div>
         </div>
       </div>
     </div>
     <div class="testi-card">
-      <div class="stars">★★★★☆</div>
-      <p class="testi-quote">"Dr. Anupama is incredibly skilled. People should have patience during busy hours — the quality of care here is genuinely good for the cost."</p>
-      <div class="testi-author">
-        <div class="author-avatar">JK</div>
+      <div class="t-stars">★★★★½</div>
+      <p class="t-quote">"Good neighbourhood clinic for general health issues. The doctor is knowledgeable and approachable — rare to find a GP who actually explains things clearly in our area."</p>
+      <div class="t-author">
+        <div class="t-avi">A</div>
         <div>
-          <div class="author-name">Jithan K.</div>
-          <div class="author-info">Google review</div>
+          <div class="t-name">Local patient</div>
+          <div class="t-src">Justdial · Varthur area</div>
         </div>
       </div>
     </div>
@@ -740,76 +565,81 @@
 </section>
 
 <!-- CTA -->
-<div class="cta-banner">
-  <h2 class="cta-title">Your baby's journey begins with a single call</h2>
-  <p class="cta-sub">City Clinic's maternity home is open 24 hours. Our team is ready to support you whenever you need us.</p>
-  <a href="tel:+919845013996" style="text-decoration:none;"><button class="cta-btn">📞 +91 98450 13996</button></a>
+<div class="cta-strip">
+  <h2 class="cta-title">Need to see a doctor today?</h2>
+  <p class="cta-sub">City Clinic is just a short walk from Prestige Lakeside Habitat and Chrysalis High. Walk in or call ahead — we're here for you.</p>
+  <a href="https://maps.google.com/?q=07+GJ+Shops+Opposite+Chrysalis+High+Gunjur+Varthur+Bengaluru+560087" target="_blank" rel="noopener" class="cta-btn">📍 Get Directions</a>
 </div>
 
-<!-- HOURS & CONTACT -->
-<div class="info-section" id="contact">
-  <div class="info-left">
-    <div class="section-label">Opening hours</div>
-    <h2 class="section-title" style="font-size:2rem;">Consultation<br><em>timings</em></h2>
-    <div class="hours-list">
-      <div class="hour-item">
-        <span class="hour-day">Monday – Saturday</span>
-        <span class="hour-time">9:30 AM – 8:00 PM</span>
-      </div>
-      <div class="hour-item">
-        <span class="hour-day">Sunday</span>
-        <span style="color:rgba(255,255,255,0.35);font-style:italic;font-size:0.82rem;">By appointment</span>
-      </div>
-      <div class="hour-item">
-        <span class="hour-day">Maternity Home</span>
-        <span class="hour-badge">Open 24 hours</span>
-      </div>
-    </div>
-    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(255,255,255,0.3);line-height:1.7;">OBG consultation operates on a token system. Tokens can be obtained at the reception during OPD hours.</p>
-  </div>
-  <div class="info-right">
-    <div class="section-label">Find us</div>
-    <h2 class="section-title" style="font-size:2rem;">Location &amp;<br><em>contact</em></h2>
-    <div class="contact-list">
-      <div class="contact-item">
-        <div class="contact-icon">📍</div>
-        <div>
-          <div class="contact-label">Address</div>
-          <div class="contact-value">07, GJ Shops, Opposite Chrysalis High, <br>State Highway 35, Gunjur - Nerige Rd, <br>Varthur, Bengaluru, Karnataka 560087</div>
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-col">
+      <div class="section-tag">Visiting hours</div>
+      <h2 class="section-h" style="font-size:1.9rem">Clinic <em>timings</em></h2>
+      <div class="hours-list">
+        <div class="hour-row">
+          <span class="hour-day">Monday – Friday</span>
+          <span class="hour-val">Morning &amp; Evening OPD</span>
+        </div>
+        <div class="hour-row">
+          <span class="hour-day">Saturday</span>
+          <span class="hour-val">Morning &amp; Evening OPD</span>
+        </div>
+        <div class="hour-row">
+          <span class="hour-day">Sunday</span>
+          <span class="open-badge">Call ahead</span>
         </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div>
-          <div class="contact-label">Phone</div>
-          <div class="contact-value"><a href="tel:+919845013996">+91 98450 13996</a></div>
+      <p style="margin-top:1.2rem;font-size:.76rem;color:rgba(255,255,255,.3);line-height:1.7">Exact timings may vary — please call or visit for up-to-date hours. Walk-ins welcome during OPD.</p>
+    </div>
+    <div class="contact-col">
+      <div class="section-tag">Find &amp; reach us</div>
+      <h2 class="section-h" style="font-size:1.9rem">Location &amp; <em>contact</em></h2>
+      <div class="contact-items">
+        <div class="c-item">
+          <div class="c-ico">📍</div>
+          <div>
+            <div class="c-lbl">Address</div>
+            <div class="c-val">No. 07, GJ Shops, Opposite Chrysalis High,<br>State Highway 35, Gunjur–Nerige Rd,<br>Varthur, Bengaluru, Karnataka 560087</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico">🏫</div>
+          <div>
+            <div class="c-lbl">Landmark</div>
+            <div class="c-val">Opposite Chrysalis High School · Near Prestige Lakeside Habitat · Near Croma, Gunjur</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico">🗺️</div>
+          <div>
+            <div class="c-lbl">Area</div>
+            <div class="c-val">Gunjur Village · Varthur Hobli · East Bengaluru</div>
+          </div>
         </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">🌐</div>
-        <div>
-          <div class="contact-label">Website</div>
-          <div class="contact-value"><a href="https://cityclinic.life" target="_blank" rel="noopener">cityclinic.life</a></div>
-        </div>
+      <div class="map-box">
+        <div class="map-ico">🗺️</div>
+        <div class="map-txt">GJ Shops, Gunjur Main Road · 560087</div>
       </div>
+      <a href="https://maps.google.com/?q=07+GJ+Shops+Opposite+Chrysalis+High+Gunjur+Varthur+Bengaluru+560087" target="_blank" rel="noopener" class="map-link">↗ Open in Google Maps</a>
     </div>
-    <div class="map-preview">
-      <div style="text-align:center">
-        <div style="font-size:2rem;margin-bottom:0.4rem">🗺️</div>
-        <div>BTM Layout, Bengaluru</div>
-      </div>
-    </div>
-    <a href="https://www.google.com/maps/place/CITY+CLINIC/@12.930983,77.6648042,13z/data=!4m10!1m2!2m1!1scity+clini!3m6!1s0x3bae1367d165b68f:0xa9b5c9b2c7472d2d!8m2!3d12.930983!4d77.7410219!15sCgtjaXR5IGNsaW5pY1oNIgtjaXR5IGNsaW5pY5IBDm1lZGljYWxfY2xpbmljmgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxMGNsTlhUblZaYm5CNVlqRk9RMDE2U2xCU1IyaHRVVlZPUkZSSVl4QULgAQD6AQUI2QUQTA!16s%2Fg%2F11fmykhfqd?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="map-preview-link">
-      ↗ Open in Google Maps
-    </a>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 City Clinic, Bengaluru · All rights reserved · <a href="https://cityclinic.life">cityclinic.life</a></p>
-  <p style="margin-top:0.4rem;">Website crafted with ♥ for City Clinic</p>
+  <div class="foot-logo">City Clinic · Gunjur</div>
+  <div class="foot-txt">© 2025 City Clinic, Bengaluru · No. 07, GJ Shops, Opposite Chrysalis High · 560087</div>
 </footer>
 
+<script>
+  const dot = document.getElementById('dot');
+  document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+</script>
 </body>
 </html>
