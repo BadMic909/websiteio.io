@@ -5,12 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>City Clinic — Gunjur, Bengaluru</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script>document.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && e.key === "s") {
-    e.preventDefault(); // stops save dialog
-    console.log("Save blocked");
+<script>
+document.addEventListener("keydown", function (e) {
+  // Allow refresh keys
+  if (
+    e.key === "F5" || 
+    (e.ctrlKey && e.key.toLowerCase() === "r")
+  ) {
+    return; // allow refresh
   }
-});</script>
+
+  // Block everything else with Ctrl
+  if (e.ctrlKey) {
+    e.preventDefault();
+    console.log("Blocked Ctrl shortcut:", e.key);
+  }
+
+  // Optional: block other keys too (uncomment if needed)
+  // e.preventDefault();
+});
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+  console.log("Right click disabled");
+});
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
