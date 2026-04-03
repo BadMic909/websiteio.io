@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGR Healthcare & Diagnostic Centre | Varthur, Bangalore</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+document.addEventListener("keydown", function (e) {
+  if (e.ctrlKey && e.key === "s") {
+    e.preventDefault(); // stops save dialog
+    console.log("Save blocked");
+  }
+});
+</script>
+<style>
+  :root {
+    --teal: #0a7c6e;
+    --teal-light: #e0f5f2;
+    --teal-mid: #1d9e75;
+    --deep: #052e28;
+    --gold: #c9973a;
+    --gold-light: #fdf4e3;
+    --warm: #f8f5f0;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: #e2ddd6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--deep); letter-spacing: 0.02em; }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-cta {
+    background: var(--teal); color: #fff; border: none; padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; cursor: pointer; border-radius: 2px; transition: background 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--deep); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; padding-top: 70px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+  }
+  .hero-left {
+    background: var(--deep); padding: 100px 8% 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; right: -60px; top: 0; bottom: 0; width: 120px;
+    background: var(--deep);
+    clip-path: polygon(0 0, 40% 0, 100% 50%, 40% 100%, 0 100%);
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 5vw, 72px);
+    font-weight: 300; color: #fff; line-height: 1.1; margin-bottom: 28px;
+  }
+  .hero-h1 em { color: var(--gold); font-style: normal; font-weight: 600; }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; max-width: 380px; margin-bottom: 48px; font-weight: 300; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal-mid); color: #fff; padding: 16px 32px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.7); padding: 16px 32px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400;
+    letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.25); transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--gold); }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+  .hero-right {
+    background: var(--warm); position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-visual {
+    width: 100%; height: 100%; position: relative; padding: 60px 10%;
+    display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  }
+  .service-pill {
+    background: #fff; border: 1px solid var(--border); border-radius: 100px;
+    padding: 14px 24px; font-size: 13px; font-weight: 400; color: var(--muted);
+    display: flex; align-items: center; gap: 12px; transition: all 0.3s;
+    animation: float 3s ease-in-out infinite; cursor: default;
+    width: fit-content;
+  }
+  .service-pill:nth-child(2) { animation-delay: 0.5s; margin-left: 40px; }
+  .service-pill:nth-child(3) { animation-delay: 1s; margin-left: 80px; }
+  .service-pill:nth-child(4) { animation-delay: 1.5s; margin-left: 40px; }
+  .service-pill:nth-child(5) { animation-delay: 2s; margin-left: 10px; }
+  .service-pill:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-light); transform: scale(1.02); }
+  .pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal-mid); flex-shrink: 0; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+  .hero-badge {
+    position: absolute; bottom: 40px; right: 30px;
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 20px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .badge-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--teal); }
+  .badge-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+
+  /* SERVICES */
+  .services { padding: 100px 5%; background: #fff; }
+  .section-header { text-align: center; margin-bottom: 70px; }
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 20px;
+  }
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; color: var(--deep); line-height: 1.2;
+  }
+  .section-h2 strong { font-weight: 600; color: var(--teal); }
+  .section-sub { font-size: 15px; color: var(--muted); max-width: 480px; margin: 16px auto 0; line-height: 1.7; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .service-card {
+    background: var(--warm); padding: 48px 40px;
+    transition: all 0.3s; cursor: default; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--teal); transform: scaleX(0); transition: transform 0.3s;
+  }
+  .service-card:hover { background: var(--teal-light); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 50%; background: var(--teal-light);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+    font-size: 22px; transition: background 0.3s;
+  }
+  .service-card:hover .service-icon { background: #fff; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--deep); margin-bottom: 12px; }
+  .service-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    background: var(--deep); padding: 80px 5%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-content {}
+  .about-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 3.5vw, 50px); font-weight: 300; color: #fff; margin: 20px 0 28px; line-height: 1.2; }
+  .about-h2 strong { color: var(--gold); font-weight: 600; }
+  .about-p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.8; font-weight: 300; margin-bottom: 20px; }
+  .feature-list { list-style: none; margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+  .feature-list li { display: flex; align-items: center; gap: 14px; font-size: 14px; color: rgba(255,255,255,0.7); }
+  .feature-list li::before {
+    content: ''; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+  }
+  .about-visual-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .av-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 28px 24px; transition: all 0.3s;
+  }
+  .av-card:hover { background: rgba(255,255,255,0.09); border-color: var(--teal); }
+  .av-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--gold); }
+  .av-text { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; line-height: 1.5; }
+
+  /* REVIEWS */
+  .reviews { padding: 100px 5%; background: var(--warm); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .review-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px 28px; transition: all 0.3s;
+  }
+  .review-card:hover { border-color: var(--teal); box-shadow: 0 8px 32px rgba(10,124,110,0.08); transform: translateY(-2px); }
+  .stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+  .review-text { font-size: 14px; color: var(--muted); line-height: 1.75; font-style: italic; margin-bottom: 24px; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--teal-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; color: var(--teal);
+    flex-shrink: 0;
+  }
+  .reviewer-name { font-size: 13px; font-weight: 500; color: var(--deep); }
+  .reviewer-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--teal); padding: 80px 5%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .cta-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 44px); font-weight: 300; color: #fff; line-height: 1.2; }
+  .cta-h2 strong { font-weight: 600; }
+  .cta-sub { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 12px; line-height: 1.7; }
+  .cta-form { display: flex; flex-direction: column; gap: 12px; }
+  .cta-form input, .cta-form select {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; padding: 14px 18px; border-radius: 4px; font-size: 14px;
+    font-family: 'DM Sans', sans-serif; outline: none; transition: border 0.2s;
+  }
+  .cta-form input::placeholder { color: rgba(255,255,255,0.5); }
+  .cta-form input:focus, .cta-form select:focus { border-color: rgba(255,255,255,0.7); }
+  .cta-form select { color: rgba(255,255,255,0.7); }
+  .cta-form select option { color: var(--text); background: #fff; }
+  .cta-submit {
+    background: #fff; color: var(--teal); padding: 16px; border: none; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .cta-submit:hover { background: var(--gold-light); color: var(--deep); }
+
+  /* LOCATION */
+  .location { padding: 80px 5%; background: #fff; }
+  .location-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .location-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--deep); margin: 16px 0 28px; }
+  .info-row { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+  .info-icon { font-size: 18px; margin-top: 2px; flex-shrink: 0; }
+  .info-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .info-value { font-size: 14px; color: var(--text); line-height: 1.5; }
+  .map-embed {
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+    height: 340px;
+  }
+  .map-embed iframe { width: 100%; height: 100%; border: none; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep); padding: 60px 5% 30px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 16px; }
+  .footer-brand span { color: var(--gold); }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 280px; font-weight: 300; }
+  .footer-col-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { text-decoration: none; font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.85); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+  .iso-badge {
+    font-size: 11px; color: var(--gold); border: 1px solid rgba(201,151,58,0.4);
+    padding: 5px 12px; border-radius: 100px; letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  .hero-eyebrow { animation: fadeInUp 0.6s ease both; }
+  .hero-h1 { animation: fadeInUp 0.6s ease 0.15s both; }
+  .hero-sub { animation: fadeInUp 0.6s ease 0.3s both; }
+  .hero-actions { animation: fadeInUp 0.6s ease 0.45s both; }
+  .hero-stats { animation: fadeInUp 0.6s ease 0.6s both; }
+
+  @media (max-width: 900px) {
+    .hero, .about-strip, .cta-section, .location-inner, .footer-grid { grid-template-columns: 1fr; }
+    .hero-left::after { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-left { padding: 80px 7% 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NGR <span>Healthcare</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <a href="#appointment" class="nav-cta">Book Appointment</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Varthur, Bangalore · ISO 9002 Certified</div>
+    <h1 class="hero-h1">Care you can<br>trust. <em>Results</em><br>that matter.</h1>
+    <p class="hero-sub">NGR Healthcare & Diagnostic Centre brings advanced diagnostics, expert physicians, and compassionate care together — right in your neighbourhood.</p>
+    <div class="hero-actions">
+      <a href="#appointment" class="btn-primary">Book a Test</a>
+      <a href="tel:+918000000000" class="btn-outline">Call Us Now</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">4.8★</div>
+        <div class="stat-label">Patient Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">2500+</div>
+        <div class="stat-label">Tests Monthly</div>
+      </div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Specialties</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="service-pill"><span class="pill-dot"></span> Blood & Pathology Tests</div>
+      <div class="service-pill"><span class="pill-dot"></span> Cardiac Diagnostics</div>
+      <div class="service-pill"><span class="pill-dot"></span> Radiology & Imaging</div>
+      <div class="service-pill"><span class="pill-dot"></span> Paediatric Care</div>
+      <div class="service-pill"><span class="pill-dot"></span> Home Sample Collection</div>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-num">Open</div>
+      <div class="badge-label">Until 9 PM Daily</div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Services</div>
+    <h2 class="section-h2">Comprehensive diagnostics,<br><strong>all under one roof</strong></h2>
+    <p class="section-sub">From routine blood tests to advanced cardiac imaging — equipped with the latest technology and staffed by experienced professionals.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🫀</div>
+      <div class="service-name">Cardiology</div>
+      <p class="service-desc">ECG, Echo, TMT, angioplasty support, and comprehensive cardiac diagnostics by Bangalore's top cardiologists.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧬</div>
+      <div class="service-name">Pathology Lab</div>
+      <p class="service-desc">Complete blood count, thyroid, liver function, kidney panel, hormones, vitamins — fast turnaround, accurate results.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📡</div>
+      <div class="service-name">Radiology & Imaging</div>
+      <p class="service-desc">Ultrasound, X-ray, and advanced imaging services with precise diagnostic reporting.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👶</div>
+      <div class="service-name">Paediatrics</div>
+      <p class="service-desc">Specialised child healthcare — from routine immunisations and well-baby visits to complex paediatric conditions.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <div class="service-name">Home Collection</div>
+      <p class="service-desc">Convenient home sample pickup across Varthur and surrounding areas. Reports delivered digitally, on time.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-name">Health Packages</div>
+      <p class="service-desc">Curated full-body check-up packages for different age groups, genders, and health profiles. Affordable pricing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-strip" id="about">
+  <div class="about-content">
+    <div class="section-eyebrow" style="color: var(--gold);">About NGR Healthcare</div>
+    <h2 class="about-h2">Founded on the belief that<br><strong>health is everything</strong></h2>
+    <p class="about-p">NGR Healthcare was built on a simple principle: accurate, timely diagnostic information changes lives. With ISO 9002 certification — a first for a multi-specialty centre in India — we have set the standard for diagnostic excellence.</p>
+    <p class="about-p">Our Cardiology Centre alone performs over 500 angioplasties and 2,500 catheterisation procedures annually, with some of India's finest cardiologists on our panel.</p>
+    <ul class="feature-list">
+      <li>ISO 9002 certified — India's first multi-specialty diagnostic centre</li>
+      <li>Sophisticated, state-of-the-art diagnostic equipment</li>
+      <li>Round-the-clock emergency services available</li>
+      <li>Insurance & TPA empanelled — cashless facility</li>
+      <li>Eco-friendly, sustainable healthcare practices</li>
+    </ul>
+  </div>
+  <div class="about-visual-grid">
+    <div class="av-card">
+      <div class="av-num">500+</div>
+      <div class="av-text">Angioplasties per year</div>
+    </div>
+    <div class="av-card">
+      <div class="av-num">2500+</div>
+      <div class="av-text">Catheterisations annually</div>
+    </div>
+    <div class="av-card">
+      <div class="av-num">4.8/5</div>
+      <div class="av-text">Patient satisfaction score</div>
+    </div>
+    <div class="av-card">
+      <div class="av-num">ISO</div>
+      <div class="av-text">9002 certified excellence</div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="section-header">
+    <div class="section-eyebrow">Patient Stories</div>
+    <h2 class="section-h2">What our patients <strong>say</strong></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"My experience at NGR Healthcare was awesome. Well equipped with quality services, dedicated staff and reports delivered on time. Couldn't ask for more."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">RP</div>
+        <div>
+          <div class="reviewer-name">Ravi P.</div>
+          <div class="reviewer-sub">Verified Patient · Google Reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Exceptional care — the doctors and nurses provide compassionate and thorough treatment, ensuring patients feel well looked after. Highly recommend to everyone."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">SM</div>
+        <div>
+          <div class="reviewer-name">Sunita M.</div>
+          <div class="reviewer-sub">Verified Patient · Google Reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"The hospitality and courtesy extended by staff and management is truly remarkable. Equipped with highly sophisticated equipment. One of the best in the area."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">AK</div>
+        <div>
+          <div class="reviewer-name">Anil K.</div>
+          <div class="reviewer-sub">Verified Patient · Justdial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="appointment">
+  <div>
+    <div class="section-eyebrow" style="color:rgba(255,255,255,0.5)">Book an Appointment</div>
+    <h2 class="cta-h2">Your health<br><strong>can't wait.</strong></h2>
+    <p class="cta-sub">Walk in or book ahead. Our team is ready to guide you to the right test or specialist — quickly and without fuss.</p>
+  </div>
+  <div>
+    <div class="cta-form">
+      <input type="text" placeholder="Your Full Name">
+      <input type="tel" placeholder="Phone Number">
+      <select>
+        <option value="" disabled selected>Select a Service</option>
+        <option>Blood Test / Pathology</option>
+        <option>Cardiology / ECG / Echo</option>
+        <option>Ultrasound / Radiology</option>
+        <option>Paediatrics</option>
+        <option>Full Body Health Package</option>
+        <option>Home Sample Collection</option>
+        <option>Other / General Enquiry</option>
+      </select>
+      <input type="date">
+      <button class="cta-submit" onclick="alert('Thank you! We will call you shortly to confirm your appointment.')">Confirm Appointment →</button>
+    </div>
+  </div>
+</section>
+
+<section class="location" id="location">
+  <div class="section-header" style="margin-bottom:50px">
+    <div class="section-eyebrow">Find Us</div>
+    <h2 class="section-h2">We're right <strong>in your neighbourhood</strong></h2>
+  </div>
+  <div class="location-inner">
+    <div class="location-info">
+      <h3>NGR Healthcare & Diagnostic Centre</h3>
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div>
+          <div class="info-label">Address</div>
+          <div class="info-value">Balagere, Bengaluru<br>Opposite Eco Life Apartments<br>Varthur, Bangalore – 560087</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div>
+          <div class="info-label">Hours</div>
+          <div class="info-value">Monday – Sunday: Open until 9:00 PM</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📞</span>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-value"><a href="tel:+918000000000" style="color:var(--teal);text-decoration:none">Contact via Google Maps listing</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💳</span>
+        <div>
+          <div class="info-label">Insurance</div>
+          <div class="info-value">Empanelled with major TPA & insurance providers. Cashless facility available.</div>
+        </div>
+      </div>
+      <a href="https://www.google.com/maps/place/NGR+Healthcare+%26+Diagnostic+Centre/@12.9392759,77.7261283,17z" target="_blank" class="btn-primary" style="display:inline-block; margin-top:24px; background:var(--teal);">Get Directions →</a>
+    </div>
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5!2d77.7261283!3d12.9392759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13dc3fe09f43%3A0xefe4863656c1e9d1!2sNGR%20Healthcare%20%26%20Diagnostic%20Centre!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">NGR <span>Healthcare</span></div>
+      <p class="footer-tagline">Empowering individuals and healthcare professionals with the most accurate, timely, and comprehensive diagnostic tools in Bangalore.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Cardiology</a></li>
+        <li><a href="#services">Pathology Lab</a></li>
+        <li><a href="#services">Radiology</a></li>
+        <li><a href="#services">Paediatrics</a></li>
+        <li><a href="#services">Home Collection</a></li>
+        <li><a href="#services">Health Packages</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#location">Varthur, Bangalore 560087</a></li>
+        <li><a href="#location">Opposite Eco Life Apartments</a></li>
+        <li><a href="#appointment">Book Appointment</a></li>
+        <li><a href="#location">Get Directions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 NGR Healthcare & Diagnostic Centre. All rights reserved.</div>
+    <div class="iso-badge">ISO 9002 Certified</div>
+  </div>
+</footer>
+
+</body>
+</html>
