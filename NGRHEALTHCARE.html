@@ -24,6 +24,10 @@ document.addEventListener("keydown", function (e) {
   // Optional: block other keys too (uncomment if needed)
   // e.preventDefault();
 });
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+  console.log("Right click disabled");
+});
 </script>
 <style>
   :root {
