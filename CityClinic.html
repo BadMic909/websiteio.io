@@ -27,7 +27,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:va
 
 /* ─── CURSOR DOT ─── */
 .cursor-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;mix-blend-mode:multiply}
-
+@media (hover: none) { .cursor-dot { display: none; } }
 /* ─── NAV ─── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
