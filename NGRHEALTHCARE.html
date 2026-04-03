@@ -7,10 +7,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script>
 document.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && e.key === "s") {
-    e.preventDefault(); // stops save dialog
-    console.log("Save blocked");
+  // Allow refresh keys
+  if (
+    e.key === "F5" || 
+    (e.ctrlKey && e.key.toLowerCase() === "r")
+  ) {
+    return; // allow refresh
   }
+
+  // Block everything else with Ctrl
+  if (e.ctrlKey) {
+    e.preventDefault();
+    console.log("Blocked Ctrl shortcut:", e.key);
+  }
+
+  // Optional: block other keys too (uncomment if needed)
+  // e.preventDefault();
 });
 </script>
 <style>
